@@ -14,9 +14,13 @@ Add the script to the `external-scripts.json` file
 
 ## Usage
 
-### Start a vote
+### Start a vote (cast one vote)
 
     hubot start vote first item, second item, third item
+
+### Start a multi vote (cast one vote per choice)
+
+    hubot start multivote first item, second item, third item
 
 ### Vote
 
