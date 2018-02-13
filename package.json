@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/joshingly/hubot-voting/issues"
   },
+  "engines": {
+    "node": ">= 8.9.4"
+  },
   "homepage": "https://github.com/joshingly/hubot-voting"
 }
