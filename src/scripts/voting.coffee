@@ -18,7 +18,7 @@
 #   None
 #
 # Author:
-#   antonishen
+#   joshingly
 
 module.exports = (robot) ->
   robot.voting = {}
