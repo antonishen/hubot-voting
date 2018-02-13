@@ -48,7 +48,6 @@ module.exports = (robot) ->
     else
       msg.send "There is not a vote to end"
 
-
   robot.respond /show choices/i, (msg) ->
     sendChoices(msg)
 
