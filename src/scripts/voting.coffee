@@ -8,7 +8,8 @@
 #   None
 #
 # Commands:
-#   hubot start vote item1, item2, item3, ...
+#   hubot start vote item1, item2, item3, ... - start a standard vote (users can cast one vote)
+#   hubot start multivote item1, item2, item3, ... - start a multi vote (users can cast one vote per choice)
 #   hubot vote for N - where N is the choice number or the choice name
 #   hubot show choices
 #   hubot show votes - shows current votes
