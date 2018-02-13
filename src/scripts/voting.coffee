@@ -69,7 +69,13 @@ module.exports = (robot) ->
     sender = robot.brain.usersForFuzzyName(msg.message.user['name'])[0].name
 
     if validChoice choice
-      robot.voting.votes[sender] = choice
+      if robot.voting.multi
+        robot.voting.votes[sender] ?= []
+        if choice not in robot.voting.votes[sender]
+          robot.voting.votes[sender].push choice
+      else
+        robot.voting.votes[sender] = choice
+
       msg.send "#{sender} voted for #{robot.voting.choices[choice]}"
     else
       msg.send "#{sender}: That is not a valid choice"
@@ -112,7 +118,12 @@ module.exports = (robot) ->
 
     voters = Object.keys robot.voting.votes
     for voter in voters
-      choice = robot.voting.votes[voter]
-      results[choice] += 1
+      if robot.voting.multi
+        choices = robot.voting.votes[voter]
+        for choice in choices
+          results[choice] += 1
+      else
+        choice = robot.voting.votes[voter]
+        results[choice] += 1
 
     results
