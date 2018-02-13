@@ -24,16 +24,10 @@ module.exports = (robot) ->
   robot.voting = {}
 
   robot.respond /start vote (.+)$/i, (msg) ->
+    startVote(msg)
 
-    if robot.voting.votes?
-      msg.send "A vote is already underway"
-      sendChoices (msg)
-    else
-      robot.voting.votes = {}
-      createChoices msg.match[1]
-
-      msg.send "Vote started"
-      sendChoices(msg)
+  robot.respond /start multivote (.+)$/i, (msg) ->
+    startVote(msg, true)
 
   robot.respond /end vote/i, (msg) ->
     if robot.voting.votes?
@@ -49,6 +43,7 @@ module.exports = (robot) ->
 
       delete robot.voting.votes
       delete robot.voting.choices
+      delete robot.voting.multi
     else
       msg.send "There is not a vote to end"
 
@@ -78,6 +73,18 @@ module.exports = (robot) ->
       msg.send "#{sender} voted for #{robot.voting.choices[choice]}"
     else
       msg.send "#{sender}: That is not a valid choice"
+
+  startVote = (msg, multi = false) ->
+    if robot.voting.votes?
+      msg.send "A vote is already underway"
+      sendChoices (msg)
+    else
+      robot.voting.votes = {}
+      robot.voting.multi = multi
+      createChoices msg.match[1]
+
+      msg.send "Vote started"
+      sendChoices(msg)
 
   createChoices = (rawChoices) ->
     robot.voting.choices = rawChoices.split(/, /)
